@@ -23,13 +23,13 @@ class HEBLeaseFeed < LeaseFeed
 
     request.on_complete do |response|
       if response.success?
-        #nothing
+        LOG.info {"Download succeeded from #{url}"}
       elsif response.timed_out?
-        #log("got a time out")
+        LOG.error {"Download timed out: #{url}"}
       elsif response.code == 0
-        #log(response.return_message)
+        LOG.error {response.return_message}
       else
-        #log("HTTP request failed: " + response.code.to_s)
+        LOG.error {"HTTP request failed: " + response.code.to_s}
       end
     end
 

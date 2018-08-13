@@ -1,9 +1,11 @@
 *.gem
 *.rbc
+*test.rb
 /.config
 /config/
 /coverage/
 /data/
+/log/
 /InstalledFiles
 /pkg/
 /spec/reports/

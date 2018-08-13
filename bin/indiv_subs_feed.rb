@@ -20,6 +20,10 @@ end
 ENV['GREENSUB_TEST'] = opts[:testing] ? '1' : '0'
 ENV['GREENSUB_NOMAIL'] = opts[:nomail] ? '1' : '0'
 
+logfile = File.open("log/indiv.log", File::WRONLY | File::APPEND | File::CREAT)
+LOG = Logger.new(logfile, 'monthly', datetime_format: '%Y-%m-%d %H:%M:%S')
+LOG.sev_threshold = Logger::INFO
+
 product = Product.new( opts[:product] )
 feed = HEBLeaseFeed.new(product)
 feed.fetch
