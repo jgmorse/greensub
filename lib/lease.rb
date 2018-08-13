@@ -56,9 +56,7 @@ class Lease
   end
 
   def expire(expiration_date=Date.today)
-    if ! @product.host.knows_subscriber?(@subscriber)
-      puts "Subscriber #{@subscriber.id} is not on host #{@product.host.name}, so nothing to expire"
-    else
+    if @product.host.knows_subscriber?(@subscriber)
       if @product.hosted?
         unless @starts == nil
           if @starts > Date.today #a lease can't begin after it ends
