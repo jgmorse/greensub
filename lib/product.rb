@@ -86,10 +86,10 @@ END_OF_MESSAGE
     begin
       Net::SMTP.start(opts[:server]) do |smtp|
          smtp.send_message msg, opts[:from], to
-         #log email sent
+         LOG.info {"Sent email to #{to}"}
       end
     rescue => err
-      puts err
+      LOG.error {"Couldn't send email to #{to} : #{err.to_s}"}
     end
   end
 end
