@@ -4,7 +4,13 @@ require_relative '../lib/product'
 require_relative '../lib/leasefeed'
 
 RSpec.describe LeaseFeed do
-  ENV['GREENSUB_TEST'] = '1'
+  before(:all) do
+    logfile = File.open("log/spec_indiv.log", File::WRONLY | File::APPEND | File::CREAT)
+    LOG = Logger.new(logfile, 'monthly', datetime_format: '%Y-%m-%d %H:%M:%S')
+    LOG.sev_threshold = Logger::DEBUG
+    ENV['GREENSUB_TEST'] = '1'
+  end
+
   context "HEB's live individual subscriber feed" do
     product = Product.new('heb')
     feed = HEBLeaseFeed.new(product)
